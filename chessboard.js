@@ -145,48 +145,47 @@ function showHintsForPiece(i, j, cells, color, type, skipClear) {
 let selectedPiece = null;
 let selectedPos = null;
 
-function enableHintClick(cells) {
-  document.querySelectorAll('.hint, .capture-hint').forEach(hint => {
-    hint.addEventListener('click', function(e) {
-      e.stopPropagation();
-      if (!selectedPiece || !selectedPos) return;
-      const targetCell = this.parentElement;
-      const [fromI, fromJ] = selectedPos;
-      let toI = -1, toJ = -1;
-      // Find the target cell's position
-      for (let i = 0; i < 8; i++) {
-        for (let j = 0; j < 8; j++) {
-          if (cells[i][j] === targetCell) {
-            toI = i; toJ = j;
-          }
-        }
+// Event delegation for hint clicks
+function handleHintClick(e, cells) {
+  const hint = e.target.closest('.hint, .capture-hint');
+  if (!hint) return;
+  e.stopPropagation();
+  if (!selectedPiece || !selectedPos) return;
+  const targetCell = hint.parentElement;
+  const [fromI, fromJ] = selectedPos;
+  let toI = -1, toJ = -1;
+  // Find the target cell's position
+  for (let i = 0; i < 8; i++) {
+    for (let j = 0; j < 8; j++) {
+      if (cells[i][j] === targetCell) {
+        toI = i; toJ = j;
       }
-      if (toI === -1 || toJ === -1) return;
-      // Animate the piece
-      const pieceImg = selectedPiece;
-      const fromRect = pieceImg.getBoundingClientRect();
-      const toRect = targetCell.getBoundingClientRect();
-      const dx = toRect.left - fromRect.left;
-      const dy = toRect.top - fromRect.top;
-      pieceImg.style.zIndex = 10;
-      pieceImg.style.transform = `translate(${dx}px, ${dy}px)`;
-      // Remove hints immediately
-      clearHints();
-      // After animation, move the piece in the DOM
-      setTimeout(() => {
-        // If this is a capture, remove the captured piece
-        const captured = targetCell.querySelector('img');
-        if (captured && captured !== pieceImg) {
-          captured.remove();
-        }
-        pieceImg.style.transform = '';
-        pieceImg.style.zIndex = '';
-        targetCell.appendChild(pieceImg);
-        selectedPiece = null;
-        selectedPos = null;
-      }, 300);
-    });
-  });
+    }
+  }
+  if (toI === -1 || toJ === -1) return;
+  // Animate the piece
+  const pieceImg = selectedPiece;
+  const fromRect = pieceImg.getBoundingClientRect();
+  const toRect = targetCell.getBoundingClientRect();
+  const dx = toRect.left - fromRect.left;
+  const dy = toRect.top - fromRect.top;
+  pieceImg.style.zIndex = 10;
+  pieceImg.style.transform = `translate(${dx}px, ${dy}px)`;
+  // Remove hints immediately
+  clearHints();
+  // After animation, move the piece in the DOM
+  setTimeout(() => {
+    // If this is a capture, remove the captured piece
+    const captured = targetCell.querySelector('img');
+    if (captured && captured !== pieceImg) {
+      captured.remove();
+    }
+    pieceImg.style.transform = '';
+    pieceImg.style.zIndex = '';
+    targetCell.appendChild(pieceImg);
+    selectedPiece = null;
+    selectedPos = null;
+  }, 300);
 }
 
 const build = () => {
@@ -240,7 +239,6 @@ const build = () => {
           const img = cell.querySelector('img');
           selectedPiece = img;
           selectedPos = [i, j];
-          setTimeout(() => enableHintClick(cells), 0);
         } else {
           selectedPiece = null;
           selectedPos = null;
@@ -251,6 +249,9 @@ const build = () => {
     }
     theGrid.appendChild(row);
   }
+
+  // Attach a single event listener for hint clicks (event delegation)
+  theGrid.addEventListener('click', (e) => handleHintClick(e, cells));
 };
 
 build();
