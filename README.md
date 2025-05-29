@@ -58,6 +58,3 @@ This project is a modern, interactive chessboard web app built with vanilla Java
 
 - Chess piece SVGs: Exported from Figma community assets
 - Inspired by modern chess UIs and Figma design principles
-
----
-Enjoy exploring and extending your interactive chessboard!
