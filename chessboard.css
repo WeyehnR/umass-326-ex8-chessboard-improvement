@@ -1,0 +1,79 @@
+:root {
+  --Board-Black: #B7C0D8;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(8, 100px);
+  grid-gap: 0;
+  width: 800px;
+  height: 800px;
+}
+
+/* TODO #1: Complete the CSS implementation */
+/* create an 8x8 grid of checkerboard squares */
+.white {
+  height: 100px;
+  width: 100px;
+  background: var(--Board-White, #e7e7e7);
+}
+.black {
+  height: 100px;
+  width: 100px;
+  background: var(--Board-Black, #B7C0D8);
+}
+
+/* .white:hover, .black:hover{
+  background-color: red;
+} */
+
+.enlarged-text {
+  font-size: 35px; 
+}
+
+.cell {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+.cell img {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: absolute;
+  left: 0; top: 0; right: 0; bottom: 0;
+  margin: auto;
+}
+
+.hint {
+  width: 24px;
+  height: 24px;
+  border-radius: 12px;
+  opacity: 0.5;
+  background: var(--Active, #7B61FF);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+}
+
+.capture-hint {
+  width: 100px;
+  height: 100px;
+  border-radius: 12px;
+  border: 3px solid var(--Active, #7B61FF);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: none;
+  pointer-events: auto;
+  box-sizing: border-box;
+}
+
+
+
+
+
