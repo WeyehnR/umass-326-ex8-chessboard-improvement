@@ -1,3 +1,7 @@
+#theGrid {
+  visibility: hidden;
+}
+
 :root {
   --Board-Black: #B7C0D8;
 }
