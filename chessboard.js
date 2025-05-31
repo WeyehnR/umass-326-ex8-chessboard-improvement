@@ -1,5 +1,5 @@
 import { placePiece, getPieceAt } from './pieces.js';
-import { addHint, clearHints, showHintsForPiece } from './hints.js';
+import { clearHints, showHintsForPiece } from './hints.js';
 
 // Constants for board configuration
 const BOARD_SIZE = 8;

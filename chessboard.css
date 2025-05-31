@@ -3,7 +3,7 @@
 }
 
 :root {
-  --Board-Black: #B7C0D8;
+  --Board-Black: #9f8cb4;
 }
 
 .grid-container {
@@ -24,7 +24,7 @@
 .black {
   height: 100px;
   width: 100px;
-  background: var(--Board-Black, #B7C0D8);
+  background: var(--Board-Black, #c0b7d8);
 }
 
 /* .white:hover, .black:hover{
@@ -55,7 +55,7 @@
   height: 24px;
   border-radius: 12px;
   opacity: 0.5;
-  background: var(--Active, #7B61FF);
+  background: var(--Active, #45339e);
   position: absolute;
   top: 50%;
   left: 50%;
@@ -76,8 +76,3 @@
   pointer-events: auto;
   box-sizing: border-box;
 }
-
-
-
-
-
