@@ -3,7 +3,6 @@ import { clearHints, showHintsForPiece } from './hints.js';
 
 // Constants for board configuration
 const BOARD_SIZE = 8;
-const PIECE_ORDER = ['rook', 'knight', 'bishop', 'queen', 'king', 'bishop', 'knight', 'rook'];
 
 // Cache DOM elements and create document fragment
 const theGrid = document.getElementById('theGrid');
@@ -54,24 +53,23 @@ function handleHintClick(e, cells) {
 function build() {
   const cells = Array.from({ length: BOARD_SIZE }, () => Array(BOARD_SIZE));
 
+  const PIECE_ORDER = ['rook', 'knight', 'bishop', 'queen', 'king', 'bishop', 'knight', 'rook'];
+
   for (let i = 0; i < BOARD_SIZE; i++) {
     const row = document.createElement('div');
     row.classList.add('row');
-    
     for (let j = 0; j < BOARD_SIZE; j++) {
       const cell = document.createElement('div');
       cell.classList.add('cell', (i + j) % 2 === 0 ? 'white' : 'black');
       cells[i][j] = cell;
 
-      // Place pieces
+      // Standard chess setup
       if (i === 0) placePiece(cell, 'black', PIECE_ORDER[j]);
       else if (i === 1) placePiece(cell, 'black', 'pawn');
       else if (i === 6) placePiece(cell, 'white', 'pawn');
       else if (i === 7) placePiece(cell, 'white', PIECE_ORDER[j]);
 
-      // Add click handler
       cell.addEventListener('click', (event) => {
-        // Prevent cell click logic if clicking a hint
         if (event.target.closest('.hint, .capture-hint')) return;
         clearHints();
         const piece = getPieceAt(i, j, cells);

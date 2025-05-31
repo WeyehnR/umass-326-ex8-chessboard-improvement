@@ -1,28 +1,61 @@
 import { addHint, addMoveOrCaptureHint, addSlidingHints } from './hints.js';
 import { getPieceAt } from './pieces.js';
 
+// Define move directions for clarity
+const ROOK_DIRECTIONS = [
+  [1, 0],   // down
+  [-1, 0],  // up
+  [0, 1],   // right
+  [0, -1],  // left
+];
+
+const BISHOP_DIRECTIONS = [
+  [1, 1],    // down-right
+  [1, -1],   // down-left
+  [-1, 1],   // up-right
+  [-1, -1],  // up-left
+];
+
+const QUEEN_DIRECTIONS = [
+  ...ROOK_DIRECTIONS,
+  ...BISHOP_DIRECTIONS,
+];
+
+const KNIGHT_MOVES = [
+  [-2, -1], [-2, 1],
+  [-1, -2], [-1, 2],
+  [1, -2],  [1, 2],
+  [2, -1],  [2, 1],
+];
+
+const KING_MOVES = [
+  [-1, -1], [-1, 0], [-1, 1],
+  [0, -1],           [0, 1],
+  [1, -1],  [1, 0],  [1, 1],
+];
+
 // Define move patterns for each piece type
 const MOVE_PATTERNS = {
   rook: {
     type: 'sliding',
-    directions: [[1,0], [-1,0], [0,1], [0,-1]]
+    directions: ROOK_DIRECTIONS,
   },
   bishop: {
     type: 'sliding',
-    directions: [[1,1], [1,-1], [-1,1], [-1,-1]]
+    directions: BISHOP_DIRECTIONS,
   },
   queen: {
     type: 'sliding',
-    directions: [[1,0], [-1,0], [0,1], [0,-1], [1,1], [1,-1], [-1,1], [-1,-1]]
+    directions: QUEEN_DIRECTIONS,
   },
   knight: {
     type: 'jumping',
-    moves: [[-2,-1], [-2,1], [-1,-2], [-1,2], [1,-2], [1,2], [2,-1], [2,1]]
+    moves: KNIGHT_MOVES,
   },
   king: {
     type: 'jumping',
-    moves: [[-1,-1], [-1,0], [-1,1], [0,-1], [0,1], [1,-1], [1,0], [1,1]]
-  }
+    moves: KING_MOVES,
+  },
 };
 
 // Special pawn moves
