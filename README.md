@@ -1,6 +1,7 @@
 # Interactive Chessboard
 
 > **Note:** This project was originally a class exercise from UMass Amherst CS 326 Web Programming. It has since been refactored and extended into an almost fully working interactive chess game.
+> if you see a readme for some reason do a control+f5 to do a cache refresh ( I just tested my index)
 
 This project is a modern, interactive chessboard web app built with vanilla JavaScript, HTML, and CSS. It features smooth piece movement, move/capture hints, and a clean, Figma-inspired design.
 
