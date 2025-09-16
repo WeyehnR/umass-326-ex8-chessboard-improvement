@@ -1,0 +1,18 @@
+# React Chess Game folder
+React Chess Game/
+
+# React Chess Conversion Guide
+React_Chess_Conversion_Guide.md
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
